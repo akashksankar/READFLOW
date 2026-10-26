@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="paper">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ReadFlow — Fall into reading</title>
+    <meta name="description" content="A mobile-first web app that turns text-based PDFs into a calm, book-like reading experience, with a one-tap return to the original PDF." />
+    <meta property="og:title" content="ReadFlow — Fall into reading" />
+    <meta property="og:description" content="A mobile-first web app that turns text-based PDFs into a calm, book-like reading experience, with a one-tap return to the original PDF." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#F6F0E4" id="theme-color-meta" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('readflow_theme');
+          var valid = ['paper', 'sepia', 'forest', 'midnight', 'oled'];
+          var theme = saved && valid.indexOf(saved) !== -1 ? saved : null;
+          if (!theme) {
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            theme = prefersDark ? 'midnight' : 'paper';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+          var colors = {
+            paper: '#F6F0E4',
+            sepia: '#EBDDC1',
+            forest: '#16241D',
+            midnight: '#10131C',
+            oled: '#000000'
+          };
+          var meta = document.getElementById('theme-color-meta');
+          if (meta && colors[theme]) {
+            meta.setAttribute('content', colors[theme]);
+          }
+          document.documentElement.style.colorScheme = (theme === 'paper' || theme === 'sepia') ? 'light' : 'dark';
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'paper');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+/* ReadFlow — Folio Design Tokens (Phase 1 & Phase 2) */
+
+:root,
+html[data-theme="paper"] {
+  --bg: #F6F0E4;
+  --surface: #FBF7EE;
+  --ink: #1D1A16;
+  --ink-2: #4A443B;
+  --ink-3: #6B6458;
+  --line: #D9CFBD;
+  --accent: #B4482A;
+  --on-accent: #FFF7EE;
+  --accent-selection: rgba(180, 72, 42, 0.25);
+
+  --hl-saffron: rgba(242, 193, 78, 0.45);
+  --hl-clay: rgba(232, 160, 138, 0.45);
+  --hl-sage: rgba(169, 197, 160, 0.45);
+  --hl-slate: rgba(157, 188, 212, 0.45);
+
+  --hl-saffron-dot: #D9A326;
+  --hl-clay-dot: #D17B62;
+  --hl-sage-dot: #6F9665;
+  --hl-slate-dot: #5E8CAD;
+
+  /* 8 Card Colors & Matching On-Card Text (Verified >= 4.5:1 contrast) */
+  --card-1: #B84A32; /* Terracotta */
+  --on-card-1: #FFF7EE;
+  --card-2: #E3A72F; /* Saffron */
+  --on-card-2: #1D1A16;
+  --card-3: #6E9B7B; /* Sage */
+  --on-card-3: #111A14;
+  --card-4: #4A6D8F; /* Slate */
+  --on-card-4: #FFF7EE;
+  --card-5: #7D4E76; /* Plum */
+  --on-card-5: #FFF7EE;
+  --card-6: #2E7370; /* Teal */
+  --on-card-6: #FFF7EE;
+  --card-7: #D9778A; /* Rose */
+  --on-card-7: #1D1215;
+  --card-8: #2B2723; /* Ink */
+  --on-card-8: #F6F0E4;
+
+  --state-success: #3B6233;
+  --state-success-bg: rgba(169, 197, 160, 0.35);
+  --state-error: #A33A2C;
+  --state-error-bg: rgba(163, 58, 44, 0.12);
+
+  --shadow-1: 0 1px 0 var(--line);
+  --shadow-2: 0 8px 24px -12px rgba(40, 24, 8, 0.28);
+  --shadow-sheet: 0 -16px 40px -16px rgba(40, 24, 8, 0.3);
+
+  --grain-opacity: 0.03;
+  color-scheme: light;
+}
+
+html[data-theme="sepia"] {
+  --bg: #EBDDC1;
+  --surface: #F2E7CF;
+  --ink: #3B2E1E;
+  --ink-2: #5A4630;
+  --ink-3: #6A5538;
+  --line: #CDB98F;
+  --accent: #9C3F1E;
+  --on-accent: #FFF7EE;
+  --accent-selection: rgba(156, 63, 30, 0.25);
+
+  --hl-saffron: rgba(242, 193, 78, 0.45);
+  --hl-clay: rgba(232, 160, 138, 0.45);
+  --hl-sage: rgba(169, 197, 160, 0.45);
+  --hl-slate: rgba(157, 188, 212, 0.45);
+
+  --card-1: #B0452E;
+  --on-card-1: #FFF7EE;
+  --card-2: #DF9F28;
+  --on-card-2: #1D1A16;
+  --card-3: #689475;
+  --on-card-3: #111A14;
+  --card-4: #466889;
+  --on-card-4: #FFF7EE;
+  --card-5: #774A70;
+  --on-card-5: #FFF7EE;
+  --card-6: #2B6D6A;
+  --on-card-6: #FFF7EE;
+  --card-7: #D47083;
+  --on-card-7: #1D1215;
+  --card-8: #2B2723;
+  --on-card-8: #F6F0E4;
+
+  --state-success: #35582E;
+  --state-success-bg: rgba(169, 197, 160, 0.4);
+  --state-error: #A33A2C;
+  --state-error-bg: rgba(163, 58, 44, 0.14);
+
+  --shadow-1: 0 1px 0 var(--line);
+  --shadow-2: 0 8px 24px -12px rgba(40, 24, 8, 0.28);
+  --shadow-sheet: 0 -16px 40px -16px rgba(40, 24, 8, 0.3);
+
+  --grain-opacity: 0.03;
+  color-scheme: light;
+}
+
+html[data-theme="forest"] {
+  --bg: #16241D;
+  --surface: #1D2F26;
+  --ink: #E4EBDD;
+  --ink-2: #BCCABB;
+  --ink-3: #8FA394;
+  --line: #2F4539;
+  --accent: #E0A458;
+  --on-accent: #16241D;
+  --accent-selection: rgba(224, 164, 88, 0.25);
+
+  --hl-saffron: rgba(242, 193, 78, 0.28);
+  --hl-clay: rgba(232, 160, 138, 0.28);
+  --hl-sage: rgba(169, 197, 160, 0.28);
+  --hl-slate: rgba(157, 188, 212, 0.28);
+
+  /* Dark themes: ~10% lower saturation, >= 4.5:1 text contrast */
+  --card-1: #B35540;
+  --on-card-1: #FFF7EE;
+  --card-2: #CFA03B;
+  --on-card-2: #161512;
+  --card-3: #6C9478;
+  --on-card-3: #101813;
+  --card-4: #4A6B8A;
+  --on-card-4: #FFF7EE;
+  --card-5: #784F72;
+  --on-card-5: #FFF7EE;
+  --card-6: #337370;
+  --on-card-6: #FFF7EE;
+  --card-7: #C77485;
+  --on-card-7: #1A1013;
+  --card-8: #28332D;
+  --on-card-8: #E4EBDD;
+
+  --state-success: #A9C5A0;
+  --state-success-bg: rgba(169, 197, 160, 0.18);
+  --state-error: #E58A7B;
+  --state-error-bg: rgba(229, 138, 123, 0.16);
+
+  --shadow-1: 0 1px 0 var(--line);
+  --shadow-2: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+  --shadow-sheet: 0 -16px 40px -16px rgba(0, 0, 0, 0.6);
+
+  --grain-opacity: 0.025;
+  color-scheme: dark;
+}
+
+html[data-theme="midnight"] {
+  --bg: #10131C;
+  --surface: #171B27;
+  --ink: #E7E4DC;
+  --ink-2: #B8B5AD;
+  --ink-3: #8D8B86;
+  --line: #262B3A;
+  --accent: #E88A63;
+  --on-accent: #10131C;
+  --accent-selection: rgba(232, 138, 99, 0.25);
+
+  --hl-saffron: rgba(242, 193, 78, 0.28);
+  --hl-clay: rgba(232, 160, 138, 0.28);
+  --hl-sage: rgba(169, 197, 160, 0.28);
+  --hl-slate: rgba(157, 188, 212, 0.28);
+
+  --card-1: #B35540;
+  --on-card-1: #FFF7EE;
+  --card-2: #CFA03B;
+  --on-card-2: #161512;
+  --card-3: #6C9478;
+  --on-card-3: #101813;
+  --card-4: #4A6B8A;
+  --on-card-4: #FFF7EE;
+  --card-5: #784F72;
+  --on-card-5: #FFF7EE;
+  --card-6: #337370;
+  --on-card-6: #FFF7EE;
+  --card-7: #C77485;
+  --on-card-7: #1A1013;
+  --card-8: #242938;
+  --on-card-8: #E7E4DC;
+
+  --state-success: #A9C5A0;
+  --state-success-bg: rgba(169, 197, 160, 0.18);
+  --state-error: #E58A7B;
+  --state-error-bg: rgba(229, 138, 123, 0.16);
+
+  --shadow-1: 0 1px 0 var(--line);
+  --shadow-2: 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-sheet: 0 -16px 40px -16px rgba(0, 0, 0, 0.65);
+
+  --grain-opacity: 0.025;
+  color-scheme: dark;
+}
+
+html[data-theme="oled"] {
+  --bg: #000000;
+  --surface: #0B0B0B;
+  --ink: #E8E6E1;
+  --ink-2: #B5B2AB;
+  --ink-3: #8A8780;
+  --line: #1E1E1E;
+  --accent: #E88A63;
+  --on-accent: #000000;
+  --accent-selection: rgba(232, 138, 99, 0.25);
+
+  --hl-saffron: rgba(242, 193, 78, 0.26);
+  --hl-clay: rgba(232, 160, 138, 0.26);
+  --hl-sage: rgba(169, 197, 160, 0.26);
+  --hl-slate: rgba(157, 188, 212, 0.26);
+
+  --card-1: #B35540;
+  --on-card-1: #FFF7EE;
+  --card-2: #CFA03B;
+  --on-card-2: #161512;
+  --card-3: #6C9478;
+  --on-card-3: #101813;
+  --card-4: #4A6B8A;
+  --on-card-4: #FFF7EE;
+  --card-5: #784F72;
+  --on-card-5: #FFF7EE;
+  --card-6: #337370;
+  --on-card-6: #FFF7EE;
+  --card-7: #C77485;
+  --on-card-7: #1A1013;
+  --card-8: #1C1B1A;
+  --on-card-8: #E8E6E1;
+
+  --state-success: #A9C5A0;
+  --state-success-bg: rgba(169, 197, 160, 0.18);
+  --state-error: #E58A7B;
+  --state-error-bg: rgba(229, 138, 123, 0.16);
+
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-sheet: none;
+
+  --grain-opacity: 0;
+  color-scheme: dark;
+}
+
+/* Shared Typography, Drop Cap, Spatial, Radius & Motion Tokens */
+:root {
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-reading-literata: "Literata Variable", Georgia, serif;
+  --font-reading-source: "Source Serif 4 Variable", Georgia, serif;
+  --font-reading-newsreader: "Newsreader Variable", Georgia, serif;
+  --font-reading-lora: "Lora Variable", Georgia, serif;
+  --font-reading-garamond: "EB Garamond Variable", Georgia, serif;
+  --font-reading-crimson: "Crimson Pro Variable", Georgia, serif;
+  --font-reading-atkinson: "Atkinson Hyperlegible Next Variable", "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+  --font-reading-lexend: "Lexend Variable", system-ui, -apple-system, sans-serif;
+  --font-reading-instrument: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+  --font-heading-playfair: "Playfair Display Variable", Georgia, serif;
+  --font-ui: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+
+  /* Default reading variables (overridden dynamically on reader container) */
+  --read-font: var(--font-reading-literata);
+  --read-heading-font: var(--font-display);
+  --read-size: 18px;
+  --read-lh: 1.65;
+  --read-para: 0.9em;
+  --read-margin: 20px;
+  --read-measure: 62ch;
+
+  /* Drop cap variables */
+  --dropcap-lines: 3;
+  --dropcap-color: var(--accent);
+  --dropcap-weight: 600;
+  --dropcap-font: var(--font-display);
+
+  /* Radius hierarchy */
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-sheet: 20px;
+  --radius-pill: 9999px;
+
+  /* Motion tokens (synced with src/motion/tokens.ts) */
+  --dur-instant: 80ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 400ms;
+  --dur-theme: 380ms;
+  --dur-flip: 320ms;
+  --dur-count: 600ms;
+  --dur-arc: 700ms;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 60ms;
+    --dur-fast: 100ms;
+    --dur-base: 120ms;
+    --dur-slow: 120ms;
+    --dur-theme: 0ms;
+    --dur-flip: 120ms;
+    --dur-count: 0ms;
+    --dur-arc: 0ms;
+    --grain-opacity: 0;
+  }
+}
+
+html[data-motion="reduced"] {
+  --dur-instant: 60ms;
+  --dur-fast: 100ms;
+  --dur-base: 120ms;
+  --dur-slow: 120ms;
+  --dur-theme: 0ms;
+  --dur-flip: 120ms;
+  --dur-count: 0ms;
+  --dur-arc: 0ms;
+  --grain-opacity: 0;
+}

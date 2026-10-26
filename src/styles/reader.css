@@ -1,0 +1,252 @@
+/* ReadFlow — Silent Reader Canvas, Drop Caps, Paged Mode & Highlight Styles */
+
+.reader-canvas {
+  font-family: var(--read-font);
+  font-size: var(--read-size);
+  line-height: var(--read-lh);
+  color: var(--ink);
+  max-width: var(--read-measure);
+  padding-left: var(--read-margin);
+  padding-right: var(--read-margin);
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  /* Reading text never animates, shifts, or fades while reading */
+  transition: none !important;
+}
+
+.reader-canvas[data-justify="true"] {
+  text-align: justify;
+  hyphens: auto;
+}
+
+.reader-canvas[data-justify="false"] {
+  text-align: left;
+  hyphens: none;
+}
+
+.reader-paragraph {
+  margin-top: 0;
+  margin-bottom: var(--read-para);
+  transition: none !important;
+}
+
+/* Heading treatments driven by reading style & headingFont */
+.reader-heading-1,
+.reader-heading-2 {
+  font-family: var(--read-heading-font, var(--font-display));
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.reader-heading-1 {
+  font-size: calc(var(--read-size) * 1.38);
+  line-height: 1.25;
+  font-weight: 600;
+  margin-top: calc(var(--read-para) * 1.4);
+  margin-bottom: calc(var(--read-para) * 0.75);
+}
+
+.reader-heading-2 {
+  font-size: calc(var(--read-size) * 1.16);
+  line-height: 1.32;
+  font-weight: 600;
+  margin-top: calc(var(--read-para) * 1.2);
+  margin-bottom: calc(var(--read-para) * 0.6);
+}
+
+.reader-canvas[data-heading-style="small-caps"] .reader-heading-1,
+.reader-canvas[data-heading-style="small-caps"] .reader-heading-2 {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.03em;
+}
+
+.reader-canvas[data-heading-style="italic"] .reader-heading-1,
+.reader-canvas[data-heading-style="italic"] .reader-heading-2 {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.reader-canvas[data-heading-style="sans-medium"] .reader-heading-1,
+.reader-canvas[data-heading-style="sans-medium"] .reader-heading-2 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.reader-canvas[data-heading-style="bold"] .reader-heading-1,
+.reader-canvas[data-heading-style="bold"] .reader-heading-2 {
+  font-weight: 700;
+}
+
+/* Drop caps & Starting letter modes (Section 2) */
+
+/* 1. Drop cap (2 to 4 lines): float fallback + initial-letter where supported */
+.reader-canvas[data-dropcap-mode="drop"] p.starts-section::first-letter {
+  font-family: var(--dropcap-font, var(--font-display));
+  font-weight: var(--dropcap-weight, 600);
+  color: var(--dropcap-color, var(--accent));
+  float: left;
+  font-size: calc(var(--read-size) * var(--dropcap-lines, 3) * 1.12);
+  line-height: 0.82;
+  padding-right: 0.1em;
+  padding-top: 0.04em;
+  margin-bottom: -0.04em;
+}
+
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .reader-canvas[data-dropcap-mode="drop"][data-dropcap-lines="2"] p.starts-section::first-letter {
+    float: none;
+    padding: 0;
+    margin-right: 0.1em;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
+  }
+  .reader-canvas[data-dropcap-mode="drop"][data-dropcap-lines="3"] p.starts-section::first-letter {
+    float: none;
+    padding: 0;
+    margin-right: 0.1em;
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+  }
+  .reader-canvas[data-dropcap-mode="drop"][data-dropcap-lines="4"] p.starts-section::first-letter {
+    float: none;
+    padding: 0;
+    margin-right: 0.1em;
+    -webkit-initial-letter: 4;
+    initial-letter: 4;
+  }
+}
+
+/* Manuscript style: Ink drop cap with a thin terracotta underline */
+.reader-canvas[data-dropcap-mode="drop"][data-dropcap-decoration="underline"] p.starts-section::first-letter {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.04em;
+}
+
+/* Editorial style: Bold theme-accent block behind 2-line initial */
+.reader-canvas[data-dropcap-mode="drop"][data-dropcap-decoration="block"] p.starts-section::first-letter {
+  background-color: var(--accent);
+  color: var(--on-accent);
+  float: left !important;
+  initial-letter: normal !important;
+  -webkit-initial-letter: normal !important;
+  font-size: calc(var(--read-size) * 2.15);
+  line-height: 1;
+  padding: 0.12em 0.22em;
+  margin-right: 0.14em;
+  margin-top: 0.06em;
+  border-radius: 2px;
+}
+
+/* 2. Raised initial (large letter on the first line, no float drop) */
+.reader-canvas[data-dropcap-mode="raised"] p.starts-section::first-letter {
+  font-family: var(--dropcap-font, var(--font-display));
+  font-weight: var(--dropcap-weight, 600);
+  color: var(--dropcap-color, var(--accent));
+  font-size: calc(var(--read-size) * 1.85);
+  line-height: 0.9;
+  margin-right: 0.05em;
+}
+
+/* 3. Small caps first line */
+.reader-canvas[data-dropcap-mode="small-caps"] p.starts-section::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: var(--dropcap-color, var(--ink));
+}
+
+/* 4. Optional "Every paragraph" choice: small bold colored first letter (no drop) */
+.reader-canvas[data-dropcap-scope="every"] p.eligible-paragraph::first-letter {
+  font-family: var(--dropcap-font, var(--font-display));
+  font-weight: 700;
+  color: var(--dropcap-color, var(--accent));
+  font-size: 1.08em;
+}
+
+.reader-furniture {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+
+/* Highlight wash behind unchanged --ink text */
+.hl-wash {
+  color: var(--ink);
+  border-radius: 2px;
+  padding: 0.04em 0;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 100% 100%;
+  cursor: pointer;
+  transition: background-size var(--dur-base) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+
+.hl-wash-entering {
+  background-size: 0% 100%;
+}
+
+.hl-wash[data-color="saffron"] {
+  background-image: linear-gradient(90deg, var(--hl-saffron), var(--hl-saffron));
+}
+
+.hl-wash[data-color="clay"] {
+  background-image: linear-gradient(90deg, var(--hl-clay), var(--hl-clay));
+}
+
+.hl-wash[data-color="sage"] {
+  background-image: linear-gradient(90deg, var(--hl-sage), var(--hl-sage));
+}
+
+.hl-wash[data-color="slate"] {
+  background-image: linear-gradient(90deg, var(--hl-slate), var(--hl-slate));
+}
+
+/* Jump to passage pulse: opacity 1 to .5 to 1 over 600ms */
+@keyframes passagePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.passage-pulse {
+  animation: passagePulse 600ms var(--ease-in-out) 1;
+}
+
+/* Content visibility for notebook entries */
+.notebook-entry-row {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 88px;
+}
+
+/* Paged Mode CSS 3D Flip & Multi-Column Strip */
+.paged-perspective {
+  perspective: 1400px;
+}
+
+.paged-flip-outgoing {
+  transform-origin: left center;
+  backface-visibility: hidden;
+  transition: transform var(--dur-flip) var(--ease-in-out), opacity var(--dur-flip) var(--ease-in-out);
+}
+
+/* Card 3D Flip Container */
+.card-perspective {
+  perspective: 1000px;
+}
+
+.card-face-backface {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Safe area helpers */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

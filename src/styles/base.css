@@ -1,0 +1,257 @@
+/* ReadFlow — Base Styles & Micro-interactions */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: var(--line);
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 200ms var(--ease-out),
+    color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out) !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--accent-selection);
+  color: var(--ink);
+}
+
+/* Keyboard focus-visible ring: 2px --accent outline, 2px offset */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Display & Editorial Headings: Fraunces with opsz auto, SOFT 40, WONK 0 */
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 40, "WONK" 0;
+}
+
+/* Folio numerals: Fraunces with tabular-nums and lining-nums */
+.font-folio {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-variation-settings: "SOFT" 40, "WONK" 0;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Quiet UI labels: 12px, weight 500, normal case, tracking 0.01em */
+.folio-label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-3);
+}
+
+/* Micro button press: :active scale .97 in --dur-instant, release --dur-fast */
+.btn-press {
+  touch-action: manipulation;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.btn-press:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: var(--dur-instant);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-press:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+html[data-motion="reduced"] .btn-press:active:not(:disabled) {
+  transform: none;
+}
+
+/* Cover hover (only on pointer: fine devices) */
+.book-cover-card {
+  border-top-left-radius: var(--radius-xs);
+  border-bottom-left-radius: var(--radius-xs);
+  border-top-right-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.book-cover-spine {
+  background: linear-gradient(
+    90deg,
+    rgba(29, 26, 22, 0.22) 0px,
+    rgba(255, 255, 255, 0.14) 2px,
+    rgba(29, 26, 22, 0.08) 4px
+  );
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .book-cover-interactive:hover .book-cover-card {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2);
+  }
+  .book-cover-interactive:hover .book-cover-spine {
+    opacity: 0.85;
+  }
+}
+
+html[data-motion="reduced"] .book-cover-interactive:hover .book-cover-card {
+  transform: none;
+}
+
+/* Empty state stroke-in animation (runs once over 900ms) */
+@keyframes strokeDrawOnce {
+  0% {
+    stroke-dashoffset: 420;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.stroke-draw-once {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 0;
+  animation: strokeDrawOnce 900ms var(--ease-out) 1 forwards;
+}
+
+.stroke-draw-short {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 0;
+  animation: strokeDrawOnce 500ms var(--ease-out) 1 forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stroke-draw-once,
+  .stroke-draw-short {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+html[data-motion="reduced"] .stroke-draw-once,
+html[data-motion="reduced"] .stroke-draw-short {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+
+/* Soundscape 3-bar level meter */
+@keyframes meterBar1 {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(0.95); }
+}
+@keyframes meterBar2 {
+  0%, 100% { transform: scaleY(0.85); }
+  45% { transform: scaleY(0.3); }
+}
+@keyframes meterBar3 {
+  0%, 100% { transform: scaleY(0.45); }
+  60% { transform: scaleY(1); }
+}
+
+.meter-bar-1 {
+  transform-origin: bottom;
+  animation: meterBar1 900ms var(--ease-in-out) infinite;
+}
+.meter-bar-2 {
+  transform-origin: bottom;
+  animation: meterBar2 750ms var(--ease-in-out) infinite;
+}
+.meter-bar-3 {
+  transform-origin: bottom;
+  animation: meterBar3 1050ms var(--ease-in-out) infinite;
+}
+
+/* Skeleton static placeholder pulse (between 0.55 and 0.85 over 1.4s) */
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+
+.folio-skeleton {
+  background-color: var(--line);
+  opacity: 0.65;
+  animation: skeletonPulse 1400ms var(--ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-skeleton {
+    animation: none;
+    opacity: 0.65;
+  }
+}
+
+html[data-motion="reduced"] .folio-skeleton {
+  animation: none;
+  opacity: 0.65;
+}
+
+/* Error icon horizontal nudge (4px twice in 240ms) */
+@keyframes errorNudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-3px); }
+}
+
+.error-nudge {
+  animation: errorNudge 240ms var(--ease-in-out) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-nudge {
+    animation: none;
+  }
+}
+
+html[data-motion="reduced"] .error-nudge {
+  animation: none;
+}
+
+/* View Transition circular theme reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

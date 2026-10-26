@@ -1,0 +1,6 @@
+{
+  "name": "ReadFlow — Fall into reading",
+  "description": "A mobile-first web app that turns text-based PDFs into a calm, book-like reading experience, with a one-tap return to the original PDF.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
